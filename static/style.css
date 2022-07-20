@@ -7,19 +7,19 @@
 
 html{
     font-size: 14px;
-    font-family: 'Titillium Web', sans-serif;
-    background-color:rgb(0,0,0);
-    color:#FEFEFE;
+    font-family: Helvetica;
+    background-color:rgb(255, 255, 255);
+    color:#202020;
 }
 
 a{
-    color:#FF0042;
+    color:#202020;
     font-weight: bolder;
     text-decoration: none;
 }
 
 h1{
-    font-size:16px;
+    font-size:20px;
     font-weight: bolder;
 }
 
@@ -37,10 +37,10 @@ h1{
 }
 
 .subforum-title{
-    background-color:#292B2E;
+    background-color:#86BC25;
     padding: 5px;
     border-radius: 5px;
-    margin:4px;
+    margin:5px;
 }
 
 .subforum-row{
@@ -52,7 +52,7 @@ h1{
     padding: 10px;
     margin:4px;
     border-radius: 5px;
-    background-color:#111314;
+    background-color:#86BC25;
 }
 
 .subforum-description *{
@@ -86,7 +86,7 @@ h1{
         grid-template-columns: 25% 75%;
         grid-template-rows: 65% 35%;
     }
-
+/*visit again*/
     .subforum-devider{
         display: block;
         border: 0;
@@ -134,7 +134,7 @@ header{
     align-items: center;
 }
 .navigation{
-    background-color:#52057b;
+    background-color:#268912;
     padding: 10px;
     width: 65%;
     display: inline-block;
@@ -147,6 +147,7 @@ header{
     font-size:60px;
     float: left;
     cursor: pointer;
+    color :rgb(255, 255, 255)
 }
 
 .nav-list{
@@ -176,19 +177,16 @@ header{
     font-size: 60px;
     display: inline-block;
     margin-right:10px;
-    color: #fff;
+    color: #268912;
     cursor: pointer;
 }
 
-@font-face {
-    font-family:aquire;
-    src:url(aquire.otf);
-}
 
 .brand{
     font-size:60px;
     display: inline-block;
-    font-family:aquire;
+    font-family: Impact;
+    font-style : Bold;
 }
 
 /*Navbar for the smartphones*/
@@ -221,12 +219,11 @@ header{
 
   /* Search Box styles */
 .search-box{
-    border: solid 1px #52057b;
+    border: solid 2px #000000;
     margin-top: 20px;
     padding: 40px;
     display:flex;
     justify-content: center;
-    box-shadow:1px 2px 3px #52057b;
 }
 
 .search-box select{
@@ -239,7 +236,7 @@ header{
 
 .search-box button{
     padding: 10px;
-    background-color:#fff;
+    background-color:rgb(255, 255, 255);
     color:#000000;
 }
 
@@ -261,7 +258,7 @@ header{
 /* forum info Styling */
 .forum-info{
     padding: 20px;
-    background-color: #111314;
+    background-color: #268912;
 }
 
 .chart{
@@ -273,7 +270,8 @@ header{
 footer{
     margin-top: 20px;
     padding: 20px;
-    background-color:  #52057b;
+    background-color:  #268912;
+    color: #ffffff;
     display: block;
     text-align: center;
 }
@@ -290,7 +288,7 @@ footer{
 .table-head div{
     padding: 5px;
     margin: 2px;
-    background-color: #2C2C2C;
+    background-color: #86BC25;
     font-weight: bold;
 }
 
@@ -319,7 +317,7 @@ footer{
 .table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
     padding: 5px;
     margin: 2px;
-    background-color: #131415;
+    background-color: #86BC25;
 }
 
 .table-row .status{
@@ -343,16 +341,17 @@ footer{
 /* navigation path*/
 .navigate{
     margin-block: 20px;
-    font-weight: lighter;
     font-size: 24px;
+    color: #ffffff;
+    background-color : #86BC25;
 }
 
 .navigate a{
-    color: #fff;
+    color: rgb(255, 255, 255);
 }
 
 .navigate a:hover{
-    color:#FF0042;
+    color:#0D8390;
     font-weight: bolder;
 }
 
@@ -361,10 +360,11 @@ footer{
 .pagination{
     padding: 20px;
     font-size: 15px;
+    background-color : #86BC25;
 }
 
 .pagination a{
-    color: #fff;
+    color: rgb(0, 0, 0);
     margin-inline: 5px;
     padding: 5px 10px;
     border: solid 0.5px #fff;
@@ -375,7 +375,7 @@ footer{
 }
 
 .note{
-    background-color:#111314;
+    background-color:#268912;
     padding: 20px;
     display: block;
 }
@@ -392,7 +392,7 @@ footer{
 
 .head{
     display: flex;
-    background-color: #2C2C2C;
+    background-color: #86BC25;
     padding: 5px;
     font-weight: bold;
     font-size: 15px;
@@ -408,7 +408,7 @@ footer{
 
 .body{
     display: flex;
-    background-color: #131415;
+    background-color: #86BC25;
     padding: 10px;
     margin-top: 5px;
 }
@@ -426,7 +426,6 @@ footer{
     border:none;
     padding:10px;
     font-weight: bolder;
-    box-shadow: 4px 6px #fff;
     cursor: pointer;
     float: right;
 }
