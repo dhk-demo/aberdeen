@@ -18,6 +18,12 @@ a{
     text-decoration: none;
 }
 
+l{
+    color:blue;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
 h1{
     font-size:20px;
     font-weight: bolder;
@@ -25,12 +31,85 @@ h1{
 
 
 /* ########################################### */
-/*           Forums.html                       */
+/*           Home.html                       */
 /* ########################################### */
 .container{
     margin: 20px;
     padding: 20px;
 }
+
+.subheading{
+    margin-top:30px;
+}
+
+.subheading-title{
+    background-color:#86BC25;
+    padding: 5px;
+    margin:5px;
+}
+
+/* for apps in home.html*/
+.subheading-app{
+    display: grid;
+    grid-template-columns: 7% 93%;
+}
+.subheading-edit{
+    display: grid;
+    float: right;
+    margin: 10px;
+    background-color: white;
+    grid-template-columns: 100%;
+}
+.subheading-column{
+    padding: 10px;
+    margin:4px;
+    background-color:rgb(221, 239, 232 );;
+}
+
+.subheading-description *{
+    margin-block: 0;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subheading-icon i{
+    font-size: 45px;
+}
+
+.subheading-devider{
+    display: none;   
+}
+/*profile tables in home*/
+.profile-head{
+    display: flex;
+}
+
+.profile-head div{
+    padding: 5px;
+    margin: 5px;
+    background-color : rgb(221, 239, 232 );
+}
+
+.profile-head .title{
+
+    flex: 10%;
+    
+    font-weight: bold;
+}
+
+.profile-head .description{
+    flex: 88%;
+}
+
+
+/* ########################################### */
+/*           Forums.html                       */
+/* ########################################### */
+
 
 .subforum{
     margin-top:20px;
@@ -47,6 +126,7 @@ h1{
     display: grid;
     grid-template-columns: 7% 60% 13% 20%;
 }
+
 
 .subforum-column{
     padding: 10px;
