@@ -6,5 +6,6 @@ social-auth-app-django==5.0.0
 =======
 social-auth-app-django==5.0.0
 django-heroku==0.3.1
+gunicorn
 #forum
 >>>>>>> 877efacd984739dd349c31ffb12c74a08042cc3e
