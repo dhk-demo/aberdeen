@@ -1,7 +1,11 @@
 Django==4.0.6
 Pillow==9.2.0
 python-dotenv==0.20.0
+<<<<<<< HEAD
+social-auth-app-django==5.0.0
+=======
 social-auth-app-django==5.0.0
 django-heroku==0.3.1
 gunicorn
 #forum
+>>>>>>> 877efacd984739dd349c31ffb12c74a08042cc3e

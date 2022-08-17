@@ -13,6 +13,10 @@ def home(request):
     return render(request, 'users/home.html')
 
 
+def consent(request):
+    return render(request, 'users/consent.html')
+
+
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
@@ -83,7 +87,8 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 def profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = UpdateProfileForm(
+            request.POST, request.FILES, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()

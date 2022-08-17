@@ -40,10 +40,13 @@ class RegisterForm(UserCreationForm):
                                                                   'data-toggle': 'password',
                                                                   'id': 'password',
                                                                   }))
+    consent = forms.BooleanField(required=True, widget=forms.CheckboxInput(
+        attrs={'placeholder': 'Consent Form Checkbox', 'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username',
+                  'email', 'password1', 'password2', 'consent']
 
 
 class LoginForm(AuthenticationForm):
@@ -80,8 +83,10 @@ class UpdateUserForm(forms.ModelForm):
 
 
 class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    avatar = forms.ImageField(widget=forms.FileInput(
+        attrs={'class': 'form-control-file'}))
+    bio = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'form-control', 'rows': 5}))
 
     class Meta:
         model = Profile
