@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'social_django',
     'forum',
 
+
 ]
 
 MIDDLEWARE = [
@@ -155,8 +156,8 @@ SOCIAL_AUTH_GITHUB_KEY = str(os.getenv('GITHUB_KEY'))
 SOCIAL_AUTH_GITHUB_SECRET = str(os.getenv('GITHUB_SECRET'))
 
 # social auth configs for google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '90052235675-amd11o8oe0fs57o4fph8r7u5k92r6bq4.apps.googleusercontent.com'  # str(os.getenv('GOOGLE_KEY'))
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'  # str(os.getenv('GOOGLE_SECRET'))
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(os.getenv('GOOGLE_KEY'))
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(os.getenv('GOOGLE_SECRET'))
 
 # email configs
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -166,6 +167,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = str(os.getenv('EMAIL_USER'))
 EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
 
+
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 
@@ -173,5 +175,3 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
