@@ -13,6 +13,10 @@ from users.views import CustomLoginView, ResetPasswordView, ChangePasswordView
 
 from users.forms import LoginForm
 
+from two_factor.urls import urlpatterns as tf_urls
+from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
+
+
 
 urlpatterns = [
      path('admin/', admin.site.urls),
@@ -40,6 +44,9 @@ urlpatterns = [
 
      path('password-change/', ChangePasswordView.as_view(), name='password_change'),
 
+    path('', include(tf_urls)),
+
+    path('', include(tf_twilio_urls)),
 
      #For OKTA
      re_path(r'^saml2_auth/', include('django_saml2_auth.urls')),
@@ -51,6 +58,9 @@ urlpatterns = [
      re_path(r'^admin/login/$', django_saml2_auth.views.signin),
 
      re_path(r'^oauth/', include('social_django.urls', namespace='social')),
+
+    
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
