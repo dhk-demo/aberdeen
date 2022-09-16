@@ -26,7 +26,8 @@ urlpatterns = [
     
      path('forums/', include('forum.urls')),
      #login related urls
-
+    
+    
      path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='users/login.html',
                                            authentication_form=LoginForm), name='login'),
 
