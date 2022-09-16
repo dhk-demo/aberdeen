@@ -223,8 +223,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #2FA and Login
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'two_factor:profile'
+LOGIN_URL = 'two_factor:login'
 
 TWO_FACTOR_SMS_GATEWAY = 'two_factor.gateways.twilio.gateway.Twilio'
 PHONENUMBER_DEFAULT_REGION = 'HK'
