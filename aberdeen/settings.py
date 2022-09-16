@@ -47,7 +47,15 @@ INSTALLED_APPS = [
     'users.apps.UserConfig',
     'social_django',
     'forum',
+    'django_saml2_auth',
 
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_email',
+    'two_factor',
+    'two_factor.plugins.phonenumber',
+    'two_factor.plugins.email',
 
 ]
 
@@ -57,6 +65,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    'two_factor.middleware.threadlocals.ThreadLocals',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
@@ -123,6 +133,40 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+SAML2_AUTH = {
+    # Metadata is required, choose either remote url or local file path
+    'METADATA_AUTO_CONF_URL': "https://dhk-demo.oktapreview.com/app/dhk-demo_aberdeenapp_2/exk4os3psyDPVDlkB1d7/sso/saml" ,
+    
+    
+    # Optional settings below
+    'DEFAULT_NEXT_URL': '/worklist',  # Custom target redirect URL after the user get logged in. Default to /admin if not set. This setting will be overwritten if you have parameter ?next= specificed in the login URL.
+    'CREATE_USER': 'TRUE', # Create a new Django user when a new user logs in. Defaults to True.
+    'NEW_USER_PROFILE': {
+        'USER_GROUPS': [],  # The default group name when a new user logs in
+        'ACTIVE_STATUS': True,  # The default active status for new users
+        'STAFF_STATUS': True,  # The staff status for new users
+        'SUPERUSER_STATUS': False,  # The superuser status for new users
+    },
+    'ATTRIBUTES_MAP': {  # Change Email/UserName/FirstName/LastName to corresponding SAML2 userprofile attributes.
+        'email': 'Email',
+        'username': 'UserName',
+        'first_name': 'FirstName',
+        'last_name': 'LastName',
+    },
+    'TRIGGER': {
+        'CREATE_USER': 'path.to.your.new.user.hook.method',
+        'BEFORE_LOGIN': 'path.to.your.login.hook.method',
+    },
+
+    
+    'ASSERTION_URL': 'http://localhost:8000', #'https://mysite.com', # Custom URL to validate incoming SAML requests against
+    'ENTITY_ID': 'http://localhost:8000/saml2_auth/acs/', # 'https://mysite.com/saml2_auth/acs/', # Populates the Issuer element in authn request
+    'NAME_ID_FORMAT': 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddres', # Sets the Format property of authn NameIDPolicy element
+    'USE_JWT': False, # Set this to True if you are running a Single Page Application (SPA) with Django Rest Framework (DRF), and are using JWT authentication to authorize client users
+    'FRONTEND_URL': 'http://localhost:8000', #'https://myfrontendclient.com', # Redirect URL for the client if you are using JWT auth with DRF. See explanation below
+    
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -148,8 +192,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'login'
+
+
 
 
 # social auth configs for github
@@ -160,13 +204,13 @@ SOCIAL_AUTH_GITHUB_SECRET = str(os.getenv('GITHUB_SECRET'))
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(os.getenv('GOOGLE_KEY'))
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(os.getenv('GOOGLE_SECRET'))
 
-# email configs
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = str(os.getenv('EMAIL_USER'))
-EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
+#email configs
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_USE_TLS = True
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = str(os.getenv('EMAIL_USER'))
+#EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
 
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
@@ -176,3 +220,21 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#2FA and Login
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'two_factor:profile'
+
+TWO_FACTOR_SMS_GATEWAY = 'two_factor.gateways.twilio.gateway.Twilio'
+PHONENUMBER_DEFAULT_REGION = 'HK'
+TWO_FACTOR_PHONE_THROTTLE_FACTOR = 2
+
+
+TWILIO_ACCOUNT_SID = str(os.getenv('TWILIO_ACCOUNT_SID'))
+TWILIO_AUTH_TOKEN = str(os.getenv('TWILIO_AUTH_TOKEN'))
+TWILIO_CALLER_ID = str(os.getenv('TWILIO_CALLER_ID'))
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'webmaster@example.org'
