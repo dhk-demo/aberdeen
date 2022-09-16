@@ -3,6 +3,7 @@
 {% load two_factor_tags %}
 
 {% block content %}
+<div class="jumbotron"> 
   <h1>{% block title %}{% trans "Account Security" %}{% endblock %}</h1>
 
   {% if default_device %}
@@ -55,4 +56,5 @@
       {% trans "Enable Two-Factor Authentication" %}</a>
     </p>
   {% endif %}
+</div>
 {% endblock %}
