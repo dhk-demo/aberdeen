@@ -215,4 +215,4 @@ OIDC_RP_SCOPES = "openid profile email groups"
 OIDC_RP_CLIENT_ID = str(os.getenv('OKTA_CLIENT_ID'))
 OIDC_RP_CLIENT_SECRET = str(os.getenv('OKTA_CLIENT_SECRET'))
 OIDC_VERIFY_SSL = True
-LOGIN_REDIRECT_URL = "https://localhost:8000/oidc/callback/"
+LOGIN_REDIRECT_URL = "https://dlabhk.herokuapp.com/oidc/callback/"
