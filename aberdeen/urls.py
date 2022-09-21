@@ -49,15 +49,10 @@ urlpatterns = [
 
     path('', include(tf_twilio_urls)),
 
-     #For OKTA
-     re_path(r'^saml2_auth/', include('django_saml2_auth.urls')),
-     # The following line will rep
-     # If you want to specific the after-login-redirect-URL, use parameter “?next=/the/path/you/want”
-     # with this view.
-     re_path(r'^accounts/login/$', django_saml2_auth.views.signin),
-     # This will redirect to okta 
-     re_path(r'^admin/login/$', django_saml2_auth.views.signin),
+    path('oidc/', include('mozilla_django_oidc.urls')),
 
+    
+     #Social login (google for now)
      re_path(r'^oauth/', include('social_django.urls', namespace='social')),
 
     
