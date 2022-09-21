@@ -20,10 +20,10 @@
                                 <div class="form-row">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
-                                            <a href="{$ url 'saml2_auth' 'acs' %}"
+                                            <a href="{% url 'oidc_authentication_init' %}"
                                                    class="btn btn-link btn-lg active btn-block">Sign in with Okta</a>
                                             <a href=""
-                                                   class="btn btn-link btn-lg active btn-block">Sign in with ForgeRock</a>
+                                                   class="btn btn-link btn-lg active btn-block">Sign in with Auth0</a>
                                             <a href=""
                                                    class="btn btn-link btn-lg active btn-block">Sign in with iAMSmart</a>
                                             <a href="{% url 'social:begin' 'google-oauth2' %}"
