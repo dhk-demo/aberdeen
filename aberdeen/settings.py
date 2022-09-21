@@ -204,11 +204,15 @@ TWILIO_CALLER_ID = str(os.getenv('TWILIO_CALLER_ID'))
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'webmaster@example.org'
 
+
+OKTA_DOMAIN = 'https://dhk-demo.oktapreview.com'
+OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_OP_JWKS_ENDPOINT = f"{OKTA_DOMAIN}/oauth2/v1/keys"
+OIDC_OP_AUTHORIZATION_ENDPOINT = f"{OKTA_DOMAIN}/oauth2/v1/authorize"
+OIDC_OP_TOKEN_ENDPOINT = f"{OKTA_DOMAIN}/oauth2/v1/token"
+OIDC_OP_USER_ENDPOINT = f"{OKTA_DOMAIN}/oauth2/v1/userinfo"
+OIDC_RP_SCOPES = "openid profile email groups"
 OIDC_RP_CLIENT_ID = str(os.getenv('OKTA_CLIENT_ID'))
 OIDC_RP_CLIENT_SECRET = str(os.getenv('OKTA_CLIENT_SECRET'))
-
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'https://dhk-demo.oktapreview.com/oauth2/v1/authorize'
-OIDC_OP_TOKEN_ENDPOINT = 'https://dhk-demo.oktapreview.com/oauth2/v1/token'
-OIDC_OP_USER_ENDPOINT = 'https://dhk-demo.oktapreview.com/oauth2/v1/userinfo'
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+OIDC_VERIFY_SSL = True
+LOGIN_REDIRECT_URL = "https://localhost:8000/oidc/callback/"
