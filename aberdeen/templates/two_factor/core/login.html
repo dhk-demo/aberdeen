@@ -1,0 +1,91 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+{% load two_factor_tags %}
+
+{% block title %} Login Page {% endblock title%}
+{% block content %}
+        <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+          <div class="card-header justify-content-center">
+            <h3 class="font-weight-light my-1 text-center">Sign In</h3>
+          </div>
+                      
+          <div class="card-body">
+            <form action="" method="post">
+              {% csrf_token %}
+              {% if wizard.steps.current == 'auth' %}
+              <div class="form-row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="form-group">
+                        <a href=""
+                                class="btn btn-link btn-lg active btn-block">Sign in with Okta</a>
+                        <a href=""
+                                class="btn btn-link btn-lg active btn-block">Sign in with Auth0</a>
+                        <a href=""
+                                class="btn btn-link btn-lg active btn-block">Sign in with iAMSmart</a>
+                        <a href="{% url 'social:begin' 'google-oauth2' %}"
+                                class="btn btn-link btn-lg active btn-block">Sign in with Google</a>
+                        <hr>
+                        <p class="text-center"><strong>OR</strong></p>
+                        <hr>
+                    </div>
+                </div>
+              </div>
+              {% endif %}
+              <div class="form-row">
+                <div class="col-md-10 offset-md-1">
+                  
+                  {% if wizard.steps.current == 'auth' %}
+                    <p>{% blocktrans %}Enter your credentials.{% endblocktrans %}</p>
+                  {% elif wizard.steps.current == 'token' %}
+                    <p>{{ device|as_verbose_action }}</p>
+                  {% elif wizard.steps.current == 'backup' %}
+                    <p>{% blocktrans trimmed %}Use this form for entering backup tokens for logging in.
+                      These tokens have been generated for you to print and keep safe. Please
+                      enter one of these backup tokens to login to your account.{% endblocktrans %}</p>
+                  {% endif %} 
+
+
+                  <div class="form-group">
+                    {% include "two_factor/_wizard_forms.html" %}
+
+                    {# hidden submit button to enable [enter] key #}
+                    <input type="submit" value="" class="d-none" />
+
+                    {% if other_devices %}
+                      <p>{% trans "Or, alternatively, use one of your other authentication methods:" %}</p>
+                      <p>
+                        {% for other in other_devices %}
+                        <button name="challenge_device" value="{{ other.persistent_id }}"
+                                class="btn btn-secondary btn-block" type="submit">
+                          {{ other|as_action }}
+                        </button>
+                      {% endfor %}</p>
+                    {% endif %}
+                    {% if backup_tokens %}
+                      <p>{% trans "As a last resort, you can use a backup token:" %}</p>
+                      <p>
+                        <button name="wizard_goto_step" type="submit" value="backup"
+                                class="btn btn-secondary btn-block">{% trans "Use Backup Token" %}</button>
+                      </p>
+                    {% endif %}
+
+                    {% include "two_factor/_wizard_actions.html" %}
+                      
+                  </div>
+                </div>
+              </div>
+                
+            </form>
+          </div>
+          <div class="card-footer text-center">
+            <div class="small">
+                <a href="{% url 'registration' %}">Don't have an account yet? Go to signup</a><br>
+                <a href="{% url 'password_reset' %}"><i>Forgot Password?</i></a>
+            </div>
+          </div>
+
+      </div>
+{% endblock content %}
+
+
+

@@ -3,6 +3,9 @@
 import os
 import sys
 
+# Set this directory's root on the path
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 
 def main():
     """Run administrative tasks."""
