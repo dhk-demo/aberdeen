@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.okta',
+    'allauth.socialaccount.providers.google',
+
 
 
     
@@ -77,6 +79,19 @@ SITE_ID = 1
 # Provider specific settings
 
 SOCIALACCOUNT_PROVIDERS = {
+    
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
+    
+    
+    
     'okta': {
         'OKTA_BASE_URL': 'dhk-demo.oktapreview.com',
         'APP': {
@@ -85,6 +100,11 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         }
     }
+
+    
+
+
+
 }
 
 
@@ -177,7 +197,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.google.GoogleOAuth2',
 
 
 # Needed to login by username in Django admin, regardless of `allauth`
@@ -216,14 +235,11 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# social auth configs for google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(os.getenv('GOOGLE_KEY'))
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(os.getenv('GOOGLE_SECRET'))
 
 
 LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL =  'account_login' # 'two_factor:login'
-LOGIN_REDIRECT_URL = 'account_login' # 'two_factor:profile'
+LOGIN_URL =   'two_factor:login'
+LOGIN_REDIRECT_URL =  'two_factor:profile'
 
 INTERNAL_IPS = ('127.0.0.1',)
 
