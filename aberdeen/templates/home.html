@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Aberdeen_Home" %}{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+  <h2>Hello {{user.first_name.title|default:'Guest'}},</h2>
+  <p>{% blocktrans trimmed %}Welcome to the app of
+      <code>aberdeen</code>. The purpose of the app is to investigate and test different identity access management features. Use this web application to get an
+    understanding of what the app can do for you.{% endblocktrans %}</p>
+
+  <h5>{% trans "The Features:" %}</h5>
+  <ol>
+    <li>{% blocktrans trimmed %}Register Account{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Enable Two-Factor Authentication (SMS, Email, Authenticator) {% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Secret Page only for 2FA Authenticated Users{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Social Login (Google, Okta){% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Password Reset {% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Profile Page with User Information, and Social Connections{% endblocktrans %}</li>
+  </ol>
+
+  <h5>{% trans "Planned Updates:" %}</h5>
+  <ol>
+    <li>{% blocktrans trimmed %}iAMSmart Social Login{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Single Sign-On to the other application(s){% endblocktrans %}</li>
+  </ol>
+
+  <h5>{% trans "If you have any comments or feedbacks" %}</h5>
+  <p>Please contact us by <a href = "mailto: aberdeen.developer@gmail.com">Email</a></p>
+{% endblock %}

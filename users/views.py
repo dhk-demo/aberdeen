@@ -1,26 +1,44 @@
-from django.shortcuts import render, redirect
+# Create your views here.
+from django.conf import settings
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, resolve_url, render
+from django.views.decorators.cache import never_cache
+from django.views.generic import FormView, TemplateView
+
+
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
+from django.contrib.auth.views import  PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
 from django.contrib.auth.decorators import login_required
-
-from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
-
-
-def home(request):
-    return render(request, 'users/home.html')
+from .forms import RegisterForm
+from .forms import UpdateUserForm, UpdateProfileForm
 
 
-def consent(request):
-    return render(request, 'users/consent.html')
+
+from two_factor.views import OTPRequiredMixin
+from two_factor.views.utils import class_view_decorator
 
 
-class RegisterView(View):
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+
+
+class ConsentView(TemplateView):
+    template_name = 'consent.html'
+
+
+
+@class_view_decorator(never_cache)
+class ExampleSecretView(OTPRequiredMixin, TemplateView):
+    template_name = 'secret.html'
+
+class RegistrationView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
-    template_name = 'users/register.html'
+    template_name = 'registration.html'
 
     def dispatch(self, request, *args, **kwargs):
         # will redirect to the home page if a user tries to access the register page while logged in
@@ -28,7 +46,7 @@ class RegisterView(View):
             return redirect(to='/')
 
         # else process dispatch as it otherwise normally would
-        return super(RegisterView, self).dispatch(request, *args, **kwargs)
+        return super(RegistrationView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
@@ -48,39 +66,22 @@ class RegisterView(View):
         return render(request, self.template_name, {'form': form})
 
 
-# Class based view that extends from the built in login view to add a remember me functionality
-class CustomLoginView(LoginView):
-    form_class = LoginForm
-
-    def form_valid(self, form):
-        remember_me = form.cleaned_data.get('remember_me')
-
-        if not remember_me:
-            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
-            self.request.session.set_expiry(0)
-
-            # Set session as modified to force data updates/cookie to be saved.
-            self.request.session.modified = True
-
-        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
-        return super(CustomLoginView, self).form_valid(form)
-
-
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'users/password_reset.html'
-    email_template_name = 'users/password_reset_email.html'
-    subject_template_name = 'users/password_reset_subject'
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    subject_template_name = 'password_reset_subject'
     success_message = "We've emailed you instructions for setting your password, " \
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('users-home')
+    success_url = reverse_lazy('home')
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
-    template_name = 'users/change_password.html'
+    template_name = 'change_password.html'
     success_message = "Successfully Changed Your Password"
-    success_url = reverse_lazy('users-home')
+    success_url = reverse_lazy('home')
+
 
 
 @login_required
@@ -99,4 +100,4 @@ def profile(request):
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'users/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form})

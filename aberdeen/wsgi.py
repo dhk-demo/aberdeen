@@ -1,5 +1,5 @@
 """
-WSGI config for user_management project.
+WSGI config for aberdeen project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
