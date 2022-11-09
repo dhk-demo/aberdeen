@@ -5,36 +5,23 @@
 {% block nav_home %}active{% endblock %}
 
 {% block content %}
-  <h1>{% blocktrans trimmed %}Improve Your Security <small>your users will thank
-    you</small>{% endblocktrans %}</h1>
-  <p>{% blocktrans trimmed %}Welcome to the example app of
-      <code>django-two-factor-auth</code>. Use this example to get an
+  <h1>{% blocktrans trimmed %}Hello {{user.first_name.title|default:'Guest'}} {% endblocktrans %}</h1>
+  <p>{% blocktrans trimmed %}Welcome to the app of
+      <code>aberdeen</code>. The purpose of the app is to investigate and test different identity access management features. Use this web application to get an
     understanding of what the app can do for you.{% endblocktrans %}</p>
-
-  <h4>{% trans "Please verify your settings" %}</h4>
-  <p>{% blocktrans trimmed%}Have you provided your Twilio settings in the
-      <code>settings_private.py</code> file? By doing so, the example app will
-      be able to call and text you to verify your authentication tokens.
-      Otherwise, the tokens will be shown on the screen.{% endblocktrans %}</p>
-
-  {% url 'registration' as reg_url %}
-  {% url 'two_factor:login' as login_url %}
-  {% url 'two_factor:setup' as setup_url %}
-  {% url 'logout' as logout_url %}
-  {% url 'secret' as secret_url %}
 
   <h4>{% trans "Next steps:" %}</h4>
   <ol>
-    <li>{% blocktrans trimmed %}Start by <a href="{{ reg_url }}">registering</a> an
-      account.{% endblocktrans %}</li>
-    <li>{% blocktrans trimmed %}<a href="{{ login_url }}">Login</a> to your account.
-      {% endblocktrans %}</li>
-    <li>{% blocktrans trimmed %}<a href="{{ setup_url }}">Enable</a> two-factor
-      authentication.{% endblocktrans %}</li>
-    <li>{% blocktrans trimmed %}Then, <a href="{{ logout_url }}">logout</a> and
-      <a href="{{ login_url }}">login</a> once more to your account to see
-      two-factor authentication at work.{% endblocktrans %}</li>
-    <li>{% blocktrans trimmed %}At last, you've gained access to the
-      <a href="{{ secret_url }}">secret page</a>! :-){% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Register Account{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Enable Two-Factor Authentication{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Social Login (Google, Okta){% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Password Reset{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Your Profile Page with Social Connections{% endblocktrans %}</li>
+  </ol>
+
+  <h4>{% trans "Planned Updates:" %}</h4>
+  <ol>
+    <li>{% blocktrans trimmed %}iAMSmart Social Login{% endblocktrans %}</li>
+    <li>{% blocktrans trimmed %}Single Sign-On to the other application(s){% endblocktrans %}</li>
   </ol>
 {% endblock %}
