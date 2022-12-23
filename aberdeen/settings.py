@@ -108,8 +108,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'iamsmart': {
         'iamsmart_BASE_URL': 'okta.dhkdemo.com',
         'APP': {
-            'client_id': str(os.getenv('IAMSMART_ID')),
-            'secret': str(os.getenv('IAMSMART_SECRET')),
+            'client_id': str(os.getenv('IAMSMART_OKTA_ID')),
+            'secret': str(os.getenv('IAMSMART_OKTA_SECRET')),
             'key': ''
         }
     },
