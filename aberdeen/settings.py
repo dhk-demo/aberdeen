@@ -59,6 +59,9 @@ INSTALLED_APPS = [
     'two_factor.plugins.phonenumber',
     'two_factor.plugins.email',
 
+    'provider',
+
+
     'bootstrapform',
 
  # The following apps are required:
@@ -78,6 +81,7 @@ SITE_ID = 1
 
 # Provider specific settings
 
+
 SOCIALACCOUNT_PROVIDERS = {
     
     'google': {
@@ -95,13 +99,21 @@ SOCIALACCOUNT_PROVIDERS = {
     'okta': {
         'OKTA_BASE_URL': 'dhk-demo.oktapreview.com',
         'APP': {
-            'client_id': '0oa4n2ii2dJLxQWxi1d7',
-            'secret': 'IP1TMwh8dxeI4gX8wQj4BH2wW54qcxDCKu7rpOMY',
+            'client_id': str(os.getenv('OKTA_ID')),
+            'secret': str(os.getenv('OKTA_SECRET')),
             'key': ''
         }
-    }
+    },
 
-    
+    'iamsmart': {
+        'iamsmart_BASE_URL': 'okta.dhkdemo.com',
+        'APP': {
+            'client_id': str(os.getenv('IAMSMART_ID')),
+            'secret': str(os.getenv('IAMSMART_SECRET')),
+            'key': ''
+        }
+    },
+
 
 
 
@@ -257,6 +269,8 @@ TWILIO_ACCOUNT_SID = str(os.getenv('TWILIO_ACCOUNT_SID'))
 TWILIO_AUTH_TOKEN = str(os.getenv('TWILIO_AUTH_TOKEN'))
 TWILIO_CALLER_ID = str(os.getenv('TWILIO_CALLER_ID'))
 
+IAM_SMART_ID = str(os.getenv('IAM_SMART_ID'))
+IAM_SMART_SECRET = str(os.getenv('IAM_SMART_SECRET'))
 
 TWO_FACTOR_REMEMBER_COOKIE_AGE = 120  # Set to 2 minute for testing
 
