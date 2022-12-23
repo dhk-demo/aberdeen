@@ -99,8 +99,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'okta': {
         'OKTA_BASE_URL': 'dhk-demo.oktapreview.com',
         'APP': {
-            'client_id': str(os.getenv('OKTA_ID')),
-            'secret': str(os.getenv('OKTA_SECRET')),
+            'client_id': '0oa4n2ii2dJLxQWxi1d7',
+            'secret': 'IP1TMwh8dxeI4gX8wQj4BH2wW54qcxDCKu7rpOMY',
             'key': ''
         }
     },
@@ -108,8 +108,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'iamsmart': {
         'iamsmart_BASE_URL': 'okta.dhkdemo.com',
         'APP': {
-            'client_id': str(os.getenv('IAMSMART_OKTA_ID')),
-            'secret': str(os.getenv('IAMSMART_OKTA_SECRET')),
+            'client_id': '0oa6g0nc6j0fqMDRO1d7',
+            'secret': 'c2rZ3uxGP9yDDjnmSVcAct44Q81guLNZhBzM0Eej',
             'key': ''
         }
     },
