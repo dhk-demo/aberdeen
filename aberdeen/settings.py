@@ -97,7 +97,7 @@ SOCIALACCOUNT_PROVIDERS = {
     
     
     'okta': {
-        'OKTA_BASE_URL': 'dhk-demo.oktapreview.com',
+        'OKTA_BASE_URL': 'okta.dhkdemo.com',
         'APP': {
             'client_id': '0oa4n2ii2dJLxQWxi1d7',
             'secret': 'IP1TMwh8dxeI4gX8wQj4BH2wW54qcxDCKu7rpOMY',
